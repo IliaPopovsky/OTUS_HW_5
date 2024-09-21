@@ -74,7 +74,6 @@ int main(void)
             head_and_1 = current_and_1->next;
         free(current_and_1);
     }
-    printf("\nThis program is complete!\n");
     return 0;
 }
 void reverse_list_traversal(struct number *head)
