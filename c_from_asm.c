@@ -1,10 +1,16 @@
+/*
+   The source program main.asm uses two types of data structures:
+   1) one data array
+   2) two unidirectional linked lists
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #define DATA_LENGTH 6
 
 struct number{
    long long int value;
-   struct number *next;  /* указывает на следующую структуру в списке */
+   struct number *next;  /* points to the next structure in the list */
 };
 
 struct number *head_and_1 = NULL;
@@ -24,13 +30,13 @@ int main(void)
        current = (struct number *)malloc(sizeof(struct number));
        if(current == NULL)
        {
-           printf("Ошибка при выделении памяти!\n");
+           printf("Error while allocating memory!\n");
            exit(1);
        }
-       if(head == NULL)           /* первая структура */
+       if(head == NULL)           /* first structure */
            head = current;
        else
-           prev->next = current;  /* последующие структуры */
+           prev->next = current;  /* subsequent structures */
        current->next = NULL;
        current->value = data[counter];
        prev = current;
@@ -52,7 +58,7 @@ int main(void)
         fflush(0);
         current_and_1 = current_and_1->next;
     }
-    current = head;
+    current = head;                   /* freeing allocated memory */
     while(current != NULL)
     {
         current = head;
@@ -60,7 +66,7 @@ int main(void)
             head = current->next;
         free(current);
     }
-    current_and_1 = head_and_1;
+    current_and_1 = head_and_1;       /* freeing allocated memory */
     while(current_and_1 != NULL)
     {
         current_and_1 = head_and_1;
@@ -68,7 +74,7 @@ int main(void)
             head_and_1 = current_and_1->next;
         free(current_and_1);
     }
-    printf("\nHello world!\n");
+    printf("\nThis program is complete!\n");
     return 0;
 }
 void reverse_list_traversal(struct number *head)
@@ -81,17 +87,16 @@ void reverse_list_traversal(struct number *head)
         current_and_1 = (struct number *)malloc(sizeof(struct number));
         if(current_and_1 == NULL)
         {
-           printf("Ошибка при выделении памяти!\n");
+           printf("Error while allocating memory!\n");
            exit(1);
         }
-        if(head_and_1 == NULL)           /* первая структура */
+        if(head_and_1 == NULL)                 /* first structure */
             head_and_1 = current_and_1;
         else
-            prev_and_1->next = current_and_1;  /* последующие структуры */
+            prev_and_1->next = current_and_1;  /* subsequent structures */
         current_and_1->next = NULL;
         current_and_1->value = current->value;
         prev_and_1 = current_and_1;
-        //printf("%lld ", current->value);
     }
 
 }
